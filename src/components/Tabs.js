@@ -1,57 +1,43 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Tab from "./Tab";
 import "../styles/Tabs.css";
 
-class Tabs extends Component {
-	static propTypes = {
-		children: PropTypes.instanceOf(Array).isRequired,
-	};
+const Tabs = ({ children }) => {
+  const [activeTab, setActiveTab] = useState(children[0].props.label);
 
-	constructor(props) {
-		super(props);
+  const onClickTabItem = (tab) => {
+    setActiveTab(tab);
+  };
 
-		this.state = {
-			activeTab: this.props.children[0].props.label,
-		};
-	}
+  return (
+    <div className="tabs">
+      <ol className="tab-list">
+        {children.map((child) => {
+          const { label } = child.props;
 
-	onClickTabItem = (tab) => {
-		this.setState({ activeTab: tab });
-	};
+          return (
+            <Tab
+              activeTab={activeTab}
+              key={label}
+              label={label}
+              onClick={onClickTabItem}
+            />
+          );
+        })}
+      </ol>
+      <div className="tab-content">
+        {children.map((child) => {
+          if (child.props.label !== activeTab) return undefined;
+          return child.props.children;
+        })}
+      </div>
+    </div>
+  );
+};
 
-	render() {
-		const {
-			onClickTabItem,
-			props: { children },
-			state: { activeTab },
-		} = this;
-
-		return (
-			<div className="tabs">
-				<ol className="tab-list">
-					{children.map((child) => {
-						const { label } = child.props;
-
-						return (
-							<Tab
-								activeTab={activeTab}
-								key={label}
-								label={label}
-								onClick={onClickTabItem}
-							/>
-						);
-					})}
-				</ol>
-				<div className="tab-content">
-					{children.map((child) => {
-						if (child.props.label !== activeTab) return undefined;
-						return child.props.children;
-					})}
-				</div>
-			</div>
-		);
-	}
-}
+Tabs.propTypes = {
+  children: PropTypes.instanceOf(Array).isRequired,
+};
 
 export default Tabs;
