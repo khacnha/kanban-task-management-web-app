@@ -6,6 +6,7 @@ import "../styles/Board.css";
 import Column from "./Column";
 import EmptyBoard from "./EmptyBoard";
 import Sidebar from "./Sidebar";
+import Tabs from "./Tabs"
 
 export default function Board() {
   const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" });
@@ -26,23 +27,31 @@ export default function Board() {
         />
       )}
 
-      {columns.length > 0 ? (
-        <>
-          {columns.map((col, index) => {
-            return <Column key={index} colIndex={index} />;
-          })}
-          <div
-            className="add-column-column heading-XL"
-            onClick={() => {
-              setIsBoardModalOpen(true);
-            }}
-          >
-            + New Column
-          </div>
-        </>
-      ) : (
-        <EmptyBoard type="edit" />
-      )}
+      <Tabs>
+        <div label="Tasks">
+          {columns.length > 0 ? (
+            <>
+              {columns.map((col, index) => {
+                return <Column key={index} colIndex={index} />;
+              })}
+              <div
+                className="add-column-column heading-XL"
+                onClick={() => {
+                  setIsBoardModalOpen(true);
+                }}
+              >
+                + New Column
+              </div>
+            </>
+          ) : (
+            <EmptyBoard type="edit" />
+          )}
+        </div>
+        <div label="LeaderBoard">
+          After 'while, <em>Crocodile</em>!
+        </div>
+      </Tabs>
+
       {isBoardModalOpen && <AddEditBoardModal type="edit" setIsBoardModalOpen={setIsBoardModalOpen} />}
     </div>
   );
