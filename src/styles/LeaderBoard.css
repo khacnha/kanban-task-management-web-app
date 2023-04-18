@@ -1,0 +1,50 @@
+.leaderboard {
+  display: flex;
+  flex-flow: column;
+  flex: 1;
+  max-width: 1124px;
+}
+
+.leaderboard img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 23px 16px;
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.101545);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.leaderboard-item .rank {
+  min-width: 50px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #635fc7;
+}
+
+.leaderboard-item .user {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  padding-right: 20px;
+}
+
+.leaderboard-item .score {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.leaderboard-item .score small {
+  font-size: 12px;
+}
