@@ -4,8 +4,6 @@
 
 .tab-content {
   display: flex;
-  overflow-x: scroll;
-  gap: 24px;
 }
 
 .tab-list {

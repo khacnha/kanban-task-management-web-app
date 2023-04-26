@@ -113,23 +113,25 @@ export default function Board() {
 
       <Tabs>
         <div label="Tasks">
+          <div class="tasks">
           {columns.length > 0 ? (
             <>
               {columns.map((col, index) => {
                 return <Column key={index} colIndex={index} />;
               })}
-              <div
-                className="add-column-column heading-XL"
+              <button
+                className="add-task-btn heading-M false add-column-column"
                 onClick={() => {
                   setIsBoardModalOpen(true);
                 }}
               >
                 + New Column
-              </div>
+              </button>
             </>
           ) : (
             <EmptyBoard type="edit" />
           )}
+          </div>
         </div>
         <div label="LeaderBoard">
           <LeaderBoard data={leaderboard} />

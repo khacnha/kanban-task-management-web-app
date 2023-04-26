@@ -1,6 +1,6 @@
 import React from "react";
 import Task from "./Task";
-import "../styles/Column&Task.css";
+import "../styles/Task.css";
 import boardsSlice from "../redux/boardsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -27,11 +27,13 @@ export default function Column({ colIndex }) {
       <p className="col-name heading-S">
         {col.name} ({col.tasks.length})
       </p>
+      <div className="row">
       {col.tasks.map((task, index) => {
         return (
           <Task key={index} taskIndex={index} colIndex={colIndex} />
         );
       })}
+      </div>
     </div>
   );
 }
