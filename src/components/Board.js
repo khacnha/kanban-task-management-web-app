@@ -113,7 +113,7 @@ export default function Board() {
 
       <Tabs>
         <div label="Tasks">
-          <div class="tasks">
+          <div className="tasks">
           {columns.length > 0 ? (
             <>
               {columns.map((col, index) => {
