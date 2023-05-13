@@ -1,9 +1,63 @@
-import { createSlice } from "@reduxjs/toolkit";
-import data from "../data.json";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { boardsAPI } from "../core/api";
+
+const initialState = [];
+export const getBoards = createAsyncThunk(
+  "boards/get",
+  async () => {
+    const data =  await boardsAPI.getAll();
+    // add isActive and columns for each items
+    const updatedData = data.map(item => ({ ...item, isActive: false }));
+    return updatedData
+  }
+);
+export const addBoard = createAsyncThunk(
+  "boards/post",
+  async (payload) => {
+    const data =  await boardsAPI.create(payload);
+    return data
+  }
+);
+export const editBoard = createAsyncThunk(
+  "boards/put",
+  async ({ id, payload }) => {
+    const data =  await boardsAPI.update(id, payload);
+    return data
+  }
+);
+export const deleteBoard = createAsyncThunk(
+  "boards/delete",
+  async ({ id }) => {
+    await boardsAPI.delete(id);
+    return { id }
+  }
+);
 
 const boardsSlice = createSlice({
   name: "boards",
-  initialState: data.boards,
+  initialState,
+  extraReducers: {
+    [getBoards.fulfilled]: (state, action) => {
+      return action.payload;
+    },
+    [addBoard.fulfilled]: (state, action) => {
+      state.push(action.payload);
+    },
+    [editBoard.fulfilled]: (state, action) => {
+      console.log("state, action", state, action)
+      const index = state.findIndex(tutorial => tutorial.id === action.payload.id);
+      console.log("state, action", index)
+      state[index] = {
+        ...state[index],
+        ...action.payload,
+      };
+      console.log("state, action", state)
+    },
+    [deleteBoard.fulfilled]: (state, action) => {
+      let index = state.findIndex(({ id }) => id === action.payload.id);
+      state.splice(index, 1);
+    },
+  },
   reducers: {
     addBoard: (state, action) => {
       const isActive = state.length > 0 ? false : true;

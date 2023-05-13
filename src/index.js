@@ -39,7 +39,6 @@ const Main = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
   };
-
   return isLoggedIn ? (
     <React.StrictMode>
       <Provider store={store}>

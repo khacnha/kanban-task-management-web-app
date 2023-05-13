@@ -11,7 +11,7 @@ import ElipsisMenu from "./ElipsisMenu.js";
 import AddEditTaskModal from "../modals/AddEditTaskModal";
 import AddEditBoardModal from "../modals/AddEditBoardModal";
 import DeleteModal from "../modals/DeleteModal";
-import boardsSlice from "../redux/boardsSlice";
+import boardsSlice, { deleteBoard } from "../redux/boardsSlice";
 import { useMediaQuery } from "react-responsive";
 
 export default function Header() {
@@ -44,7 +44,7 @@ export default function Header() {
 
   const onDeleteBtnClick = (e) => {
     if (e.target.textContent === "Delete") {
-      dispatch(boardsSlice.actions.deleteBoard());
+      dispatch(deleteBoard({id: board.id}));
       dispatch(boardsSlice.actions.setBoardActive({ index: 0 }));
       setIsDeleteModalOpen(false);
     } else {

@@ -5,7 +5,8 @@ import themeSlice from "./themeSlice";
 const store = configureStore({
   reducer: {
     boards: boardsSlice.reducer,
-    theme: themeSlice.reducer
+    theme: themeSlice.reducer,
+    devTools: true
   }
 })
 
