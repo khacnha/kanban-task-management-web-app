@@ -21,7 +21,7 @@ export default function AddEditBoardModal({ type, setIsBoardModalOpen }) {
   if (type === "edit" && isFirstLoad) {
     setNewColumns(
       board.columns.map((col) => {
-        return { ...col, id: uuidv4() };
+        return { ...col };
       })
     );
     setName(board.name);
