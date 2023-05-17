@@ -18,8 +18,9 @@ export default function Column({ colIndex }) {
       const newCol = board.columns.find((col, i) => i === colIndex)
       const task = prevCol.tasks[taskIndex];
       console.log("prevCol", prevCol, newCol, task);
-      dispatch(editTask({ id: task.id, 
-        payload: {...task, column_id: newCol.id}, 
+      dispatch(editTask({
+        id: task.id,
+        payload: { ...task, column_id: newCol.id },
         old_column_id: prevCol.id
       }));
     }
@@ -35,11 +36,11 @@ export default function Column({ colIndex }) {
         {col.name} ({col.tasks.length})
       </p>
       <div className="row">
-      {col.tasks.map((task, index) => {
-        return (
-          <Task key={index} taskIndex={index} colIndex={colIndex} />
-        );
-      })}
+        {col.tasks.map((task, index) => {
+          return (
+            <Task key={index} taskIndex={index} colIndex={colIndex} />
+          );
+        })}
       </div>
     </div>
   );

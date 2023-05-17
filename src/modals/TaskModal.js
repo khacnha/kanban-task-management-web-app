@@ -5,10 +5,10 @@ import Subtask from "../components/Subtask";
 import ElipsisMenu from "../components/ElipsisMenu";
 import DeleteModal from "./DeleteModal";
 import elipsis from "../assets/icon-vertical-ellipsis.svg";
-import boardsSlice, { deleteTask } from "../redux/boardsSlice";
+import boardsSlice, { deleteTask, editTask } from "../redux/boardsSlice";
 import AddEditTaskModal from "./AddEditTaskModal";
 
-export default function TaskModal({ taskIndex, colIndex, setIsTaskModalOpen}) {
+export default function TaskModal({ taskIndex, colIndex, setIsTaskModalOpen }) {
   const dispatch = useDispatch();
   const [isElipsisMenuOpen, setIsElipsisMenuOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -37,14 +37,15 @@ export default function TaskModal({ taskIndex, colIndex, setIsTaskModalOpen}) {
     if (e.target !== e.currentTarget) {
       return;
     }
-    dispatch(
-      boardsSlice.actions.setTaskStatus({
-        taskIndex,
-        colIndex,
-        newColIndex,
-        status,
-      })
-    );
+    if (colIndex !== newColIndex) {
+      const newCol = board.columns.find((col, i) => i === newColIndex)
+      dispatch(editTask({
+        id: task.id,
+        payload: { ...task, column_id: newCol.id },
+        old_column_id: col.id
+      }));
+    }
+
     setIsTaskModalOpen(false)
   };
 
