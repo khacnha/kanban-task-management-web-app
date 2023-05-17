@@ -8,6 +8,7 @@ import Login from './Login';
 import store from './redux/store';
 import reportWebVitals from './reportWebVitals';
 import { auth } from './core/api';
+import { ToastContainer } from "react-toastify";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -39,12 +40,14 @@ const Main = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
   };
+
   return isLoggedIn ? (
-    <React.StrictMode>
+    <>
       <Provider store={store}>
         <App />
+        <ToastContainer/>
       </Provider>
-    </React.StrictMode>
+    </>
   ) : (
     <Login handleLogin={handleLogin} error={error} />
   );

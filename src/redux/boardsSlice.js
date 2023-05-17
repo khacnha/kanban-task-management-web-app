@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { boardsAPI } from "../core/api";
+import { boardsAPI, tasksAPI } from "../core/api";
 
 const initialState = [];
 export const getBoards = createAsyncThunk(
   "boards/get",
   async () => {
-    const data =  await boardsAPI.getAll();
+    const data = await boardsAPI.getAll();
     // add isActive and columns for each items
     const updatedData = data.map(item => ({ ...item, isActive: false }));
     return updatedData
@@ -14,14 +14,14 @@ export const getBoards = createAsyncThunk(
 export const addBoard = createAsyncThunk(
   "boards/post",
   async (payload) => {
-    const data =  await boardsAPI.create(payload);
+    const data = await boardsAPI.create(payload);
     return data
   }
 );
 export const editBoard = createAsyncThunk(
   "boards/put",
   async ({ id, payload }) => {
-    const data =  await boardsAPI.update(id, payload);
+    const data = await boardsAPI.update(id, payload);
     return data
   }
 );
@@ -29,6 +29,28 @@ export const deleteBoard = createAsyncThunk(
   "boards/delete",
   async ({ id }) => {
     await boardsAPI.delete(id);
+    return { id }
+  }
+);
+export const addTask = createAsyncThunk(
+  "tasks/post",
+  async (payload) => {
+    console.log("tasks/post", payload)
+    const data = await tasksAPI.create(payload);
+    return data
+  }
+);
+export const editTask = createAsyncThunk(
+  "tasks/put",
+  async ({ id, payload, old_column_id }) => {
+    const data = await tasksAPI.update(id, payload);
+    return {...data, old_column_id}
+  }
+);
+export const deleteTask = createAsyncThunk(
+  "tasks/delete",
+  async ({ id }) => {
+    await tasksAPI.delete(id);
     return { id }
   }
 );
@@ -51,11 +73,51 @@ const boardsSlice = createSlice({
         ...state[index],
         ...action.payload,
       };
-      console.log("state, action", state)
     },
     [deleteBoard.fulfilled]: (state, action) => {
       let index = state.findIndex(({ id }) => id === action.payload.id);
       state.splice(index, 1);
+    },
+    [addTask.fulfilled]: (state, action) => {
+      const board = state.find((board) => board.isActive);
+      console.log("addTask, board",board)
+      const column = board.columns.find((col) => col.id === action.payload.column_id);
+      column.tasks.push(action.payload);
+    },
+    [editTask.fulfilled]: (state, action) => {
+      console.log("state, action", action.payload)
+      const {
+        id,
+        title,
+        description,
+        subtasks,
+        column_id,
+        old_column_id,
+      } = action.payload;
+      const board = state.find((board) => board.isActive);
+      console.log("state, board",board)
+      const column = board.columns.find((col, index) => col.id === old_column_id);
+      console.log("state, column", column)
+      const task = column.tasks.find((task, index) => task.id === id);
+      console.log("state, task",task)
+      task.title = title;
+      task.description = description;
+      task.subtasks = subtasks;
+      task.column_id = column_id;
+
+      if (old_column_id === column_id) return;
+      column.tasks = column.tasks.filter((task, index) => task.id !== id);
+      const newCol = board.columns.find((col, index) => col.id === column_id);
+      newCol.tasks.push(task);
+    },
+    [deleteTask.fulfilled]: (state, action) => {
+      const payload = action.payload;
+      const board = state.find((board) => board.isActive);
+      const updatedColumns = board.columns.map((col) => {
+        const updatedTasks = col.tasks.filter((task) => task.id !== payload.id);
+        return { ...col, tasks: updatedTasks };
+      });
+      board.columns = updatedColumns;
     },
   },
   reducers: {

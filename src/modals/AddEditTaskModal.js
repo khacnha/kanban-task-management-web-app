@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import crossIcon from "../assets/icon-cross.svg";
-import boardsSlice from "../redux/boardsSlice";
+import { addTask, editTask } from "../redux/boardsSlice";
 
 export default function AddEditTaskModal({
   type,
@@ -32,7 +32,7 @@ export default function AddEditTaskModal({
   if (type === "edit" && isFirstLoad) {
     setSubtasks(
       task.subtasks.map((subtask) => {
-        return { ...subtask, id: uuidv4() };
+        return { ...subtask };
       })
     );
     setTitle(task.title);
@@ -75,24 +75,25 @@ export default function AddEditTaskModal({
   const onSubmit = (type) => {
     if (type === "add") {
       dispatch(
-        boardsSlice.actions.addTask({
+        addTask({
           title,
           description,
           subtasks,
-          status,
-          newColIndex,
+          column_id: columns[newColIndex].id
         })
       );
     } else {
       dispatch(
-        boardsSlice.actions.editTask({
-          title,
-          description,
-          subtasks,
-          status,
-          taskIndex,
-          prevColIndex,
-          newColIndex,
+        editTask({
+          id: task.id,
+          payload: {
+            title,
+            description,
+            subtasks,
+            taskIndex,
+            column_id: columns[newColIndex].id
+          },
+          old_column_id: columns[prevColIndex].id,
         })
       );
     }
@@ -210,7 +211,7 @@ export default function AddEditTaskModal({
           }}
           className="create-btn"
         >
-          Create Task
+          {type === "add" ? "Create Task" : "Update Task"}
         </button>
       </div>
     </div>

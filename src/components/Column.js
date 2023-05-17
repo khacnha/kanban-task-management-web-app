@@ -1,7 +1,7 @@
 import React from "react";
 import Task from "./Task";
 import "../styles/Task.css";
-import boardsSlice from "../redux/boardsSlice";
+import boardsSlice, { editTask } from "../redux/boardsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Column({ colIndex }) {
@@ -14,7 +14,14 @@ export default function Column({ colIndex }) {
     const { prevColIndex, taskIndex } = JSON.parse(e.dataTransfer.getData("text"));
 
     if (colIndex !== prevColIndex) {
-      dispatch(boardsSlice.actions.dragTask({ colIndex, prevColIndex, taskIndex }));
+      const prevCol = board.columns.find((col, i) => i === prevColIndex);
+      const newCol = board.columns.find((col, i) => i === colIndex)
+      const task = prevCol.tasks[taskIndex];
+      console.log("prevCol", prevCol, newCol, task);
+      dispatch(editTask({ id: task.id, 
+        payload: {...task, column_id: newCol.id}, 
+        old_column_id: prevCol.id
+      }));
     }
   }
 

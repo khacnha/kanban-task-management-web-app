@@ -5,7 +5,7 @@ import Subtask from "../components/Subtask";
 import ElipsisMenu from "../components/ElipsisMenu";
 import DeleteModal from "./DeleteModal";
 import elipsis from "../assets/icon-vertical-ellipsis.svg";
-import boardsSlice from "../redux/boardsSlice";
+import boardsSlice, { deleteTask } from "../redux/boardsSlice";
 import AddEditTaskModal from "./AddEditTaskModal";
 
 export default function TaskModal({ taskIndex, colIndex, setIsTaskModalOpen}) {
@@ -26,7 +26,7 @@ export default function TaskModal({ taskIndex, colIndex, setIsTaskModalOpen}) {
     }
   });
 
-  const [status, setStatus] = useState(task.status);
+  const [status, setStatus] = useState(col.name);
   const [newColIndex, setNewColIndex] = useState(columns.indexOf(col));
   const onChange = (e) => {
     setStatus(e.target.value);
@@ -50,7 +50,7 @@ export default function TaskModal({ taskIndex, colIndex, setIsTaskModalOpen}) {
 
   const onDeleteBtnClick = (e) => {
     if (e.target.textContent === "Delete") {
-      dispatch(boardsSlice.actions.deleteTask({ taskIndex, colIndex }));
+      dispatch(deleteTask({ id: task.id }));
       setIsTaskModalOpen(false)
       setIsDeleteModalOpen(false)
     } else {
