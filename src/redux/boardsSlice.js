@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { boardsAPI, tasksAPI } from "../core/api";
+import { boardsAPI, subtasksAPI, tasksAPI } from "../core/api";
 
 const initialState = [];
 export const getBoards = createAsyncThunk(
@@ -44,7 +44,7 @@ export const editTask = createAsyncThunk(
   "tasks/put",
   async ({ id, payload, old_column_id }) => {
     const data = await tasksAPI.update(id, payload);
-    return {...data, old_column_id}
+    return { ...data, old_column_id }
   }
 );
 export const deleteTask = createAsyncThunk(
@@ -52,6 +52,13 @@ export const deleteTask = createAsyncThunk(
   async ({ id }) => {
     await tasksAPI.delete(id);
     return { id }
+  }
+);
+export const editSubtask = createAsyncThunk(
+  "subtask/put",
+  async ({ id, payload, taskIndex, colIndex }) => {
+    const data = await subtasksAPI.update(id, payload);
+    return { ...data, taskIndex, colIndex }
   }
 );
 
@@ -80,7 +87,7 @@ const boardsSlice = createSlice({
     },
     [addTask.fulfilled]: (state, action) => {
       const board = state.find((board) => board.isActive);
-      console.log("addTask, board",board)
+      console.log("addTask, board", board)
       const column = board.columns.find((col) => col.id === action.payload.column_id);
       column.tasks.push(action.payload);
     },
@@ -95,11 +102,8 @@ const boardsSlice = createSlice({
         old_column_id,
       } = action.payload;
       const board = state.find((board) => board.isActive);
-      console.log("state, board",board)
       const column = board.columns.find((col, index) => col.id === old_column_id);
-      console.log("state, column", column)
       const task = column.tasks.find((task, index) => task.id === id);
-      console.log("state, task",task)
       task.title = title;
       task.description = description;
       task.subtasks = subtasks;
@@ -118,6 +122,14 @@ const boardsSlice = createSlice({
         return { ...col, tasks: updatedTasks };
       });
       board.columns = updatedColumns;
+    },
+    [editSubtask.fulfilled]: (state, action) => {
+      const payload = action.payload;
+      const board = state.find((board) => board.isActive);
+      const col = board.columns.find((col, i) => i === payload.colIndex);
+      const task = col.tasks.find((task, i) => i === payload.taskIndex);
+      const subtask = task.subtasks.find((subtask, i) => subtask.id === payload.id);
+      subtask.is_completed = payload.is_completed;
     },
   },
   reducers: {
@@ -193,7 +205,7 @@ const boardsSlice = createSlice({
       const col = board.columns.find((col, i) => i === payload.colIndex);
       const task = col.tasks.find((task, i) => i === payload.taskIndex);
       const subtask = task.subtasks.find((subtask, i) => i === payload.index);
-      subtask.isCompleted = !subtask.isCompleted;
+      subtask.is_completed = payload.is_completed;
     },
     setTaskStatus: (state, action) => {
       const payload = action.payload;

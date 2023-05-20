@@ -25,8 +25,8 @@ export default function AddEditTaskModal({
   const [status, setStatus] = useState(columns[prevColIndex].name);
   const [newColIndex, setNewColIndex] = useState(prevColIndex);
   const [subtasks, setSubtasks] = useState([
-    { title: "", isCompleted: false, id: uuidv4() },
-    { title: "", isCompleted: false, id: uuidv4() },
+    { title: "", is_completed: false, id: uuidv4() },
+    { title: "", is_completed: false, id: uuidv4() },
   ]);
 
   if (type === "edit" && isFirstLoad) {
@@ -177,7 +177,7 @@ export default function AddEditTaskModal({
           onClick={() => {
             setSubtasks((state) => [
               ...state,
-              { title: "", isCompleted: false, id: uuidv4() },
+              { title: "", is_completed: false, id: uuidv4() },
             ]);
           }}
           className="add-column-btn btn-light"

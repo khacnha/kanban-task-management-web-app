@@ -13,7 +13,7 @@ export default function Task({ taskIndex, colIndex }) {
   let completed = 0;
   let subtasks = task.subtasks;
   subtasks.forEach((subtask) => {
-    if (subtask.isCompleted) {
+    if (subtask.is_completed) {
       completed++;
     }
   });

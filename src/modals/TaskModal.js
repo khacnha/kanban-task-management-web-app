@@ -5,7 +5,7 @@ import Subtask from "../components/Subtask";
 import ElipsisMenu from "../components/ElipsisMenu";
 import DeleteModal from "./DeleteModal";
 import elipsis from "../assets/icon-vertical-ellipsis.svg";
-import boardsSlice, { deleteTask, editTask } from "../redux/boardsSlice";
+import { deleteTask, editTask } from "../redux/boardsSlice";
 import AddEditTaskModal from "./AddEditTaskModal";
 
 export default function TaskModal({ taskIndex, colIndex, setIsTaskModalOpen }) {
@@ -21,7 +21,7 @@ export default function TaskModal({ taskIndex, colIndex, setIsTaskModalOpen }) {
 
   let completed = 0;
   subtasks.forEach((subtask) => {
-    if (subtask.isCompleted) {
+    if (subtask.is_completed) {
       completed++;
     }
   });

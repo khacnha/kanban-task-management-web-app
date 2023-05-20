@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import boardsSlice from "../redux/boardsSlice";
+import { editSubtask } from "../redux/boardsSlice";
 
 export default function Subtask({ index, taskIndex, colIndex }) {
   const dispatch = useDispatch();
@@ -9,11 +9,11 @@ export default function Subtask({ index, taskIndex, colIndex }) {
   const col = board.columns.find((col, i) => i === colIndex);
   const task = col.tasks.find((task, i) => i === taskIndex);
   const subtask = task.subtasks.find((subtask, i) => i === index);
-  const checked = subtask.isCompleted;
+  const checked = subtask.is_completed;
 
   const onChange = (e) => {
     dispatch(
-      boardsSlice.actions.setSubtaskCompleted({ index, taskIndex, colIndex })
+      editSubtask({ id: subtask.id, payload: {is_completed: !checked}, taskIndex, colIndex })
     );
   };
 
