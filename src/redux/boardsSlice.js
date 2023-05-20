@@ -43,6 +43,7 @@ export const addTask = createAsyncThunk(
 export const editTask = createAsyncThunk(
   "tasks/put",
   async ({ id, payload, old_column_id }) => {
+    console.log("tasks/put", { id, payload, old_column_id })
     const data = await tasksAPI.update(id, payload);
     return { ...data, old_column_id }
   }
@@ -87,18 +88,17 @@ const boardsSlice = createSlice({
     },
     [addTask.fulfilled]: (state, action) => {
       const board = state.find((board) => board.isActive);
-      console.log("addTask, board", board)
       const column = board.columns.find((col) => col.id === action.payload.column_id);
       column.tasks.push(action.payload);
     },
     [editTask.fulfilled]: (state, action) => {
-      console.log("state, action", action.payload)
       const {
         id,
         title,
         description,
         subtasks,
         column_id,
+        assigned_id,
         old_column_id,
       } = action.payload;
       const board = state.find((board) => board.isActive);
@@ -108,6 +108,7 @@ const boardsSlice = createSlice({
       task.description = description;
       task.subtasks = subtasks;
       task.column_id = column_id;
+      task.assigned_id = assigned_id;
 
       if (old_column_id === column_id) return;
       column.tasks = column.tasks.filter((task, index) => task.id !== id);

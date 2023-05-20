@@ -84,3 +84,10 @@ export const subtasksAPI = {
     return response.data;
   },
 };
+
+export const userApi = {
+  getAll: async () => {
+    const response = await api.get("/v1/users");
+    return response.data;
+  },
+};

@@ -7,6 +7,7 @@ import DeleteModal from "./DeleteModal";
 import elipsis from "../assets/icon-vertical-ellipsis.svg";
 import { deleteTask, editTask } from "../redux/boardsSlice";
 import AddEditTaskModal from "./AddEditTaskModal";
+import UserSelect from "../components/UserSelect";
 
 export default function TaskModal({ taskIndex, colIndex, setIsTaskModalOpen }) {
   const dispatch = useDispatch();
@@ -110,6 +111,8 @@ export default function TaskModal({ taskIndex, colIndex, setIsTaskModalOpen }) {
             />
           );
         })}
+
+        <UserSelect valueDefault={task.assigned_id} />
 
         <div className="select-column-container">
           <label className="text-M">Current Status</label>

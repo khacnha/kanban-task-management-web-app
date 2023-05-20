@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import crossIcon from "../assets/icon-cross.svg";
 import { addTask, editTask } from "../redux/boardsSlice";
+import UserSelect from "../components/UserSelect";
 
 export default function AddEditTaskModal({
   type,
@@ -16,6 +17,7 @@ export default function AddEditTaskModal({
   const [isValid, setIsValid] = useState(true);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [assigned_id, setAssignedId] = useState();
   const board = useSelector((state) => state.boards).find(
     (board) => board.isActive
   );
@@ -37,12 +39,16 @@ export default function AddEditTaskModal({
     );
     setTitle(task.title);
     setDescription(task.description);
+    setAssignedId(task.assigned_id)
     setIsFirstLoad(false);
   }
 
   const validate = () => {
     setIsValid(false);
     if (!title.trim()) {
+      return false;
+    }
+    if (!assigned_id) {
       return false;
     }
     for (let i = 0; i < subtasks.length; i++) {
@@ -79,7 +85,8 @@ export default function AddEditTaskModal({
           title,
           description,
           subtasks,
-          column_id: columns[newColIndex].id
+          column_id: columns[newColIndex].id,
+          assigned_id: parseInt(assigned_id),
         })
       );
     } else {
@@ -91,13 +98,19 @@ export default function AddEditTaskModal({
             description,
             subtasks,
             taskIndex,
-            column_id: columns[newColIndex].id
+            column_id: columns[newColIndex].id,
+            assigned_id: parseInt(assigned_id),
           },
           old_column_id: columns[prevColIndex].id,
         })
       );
     }
   };
+
+  const assignedUser = (user_id) => {
+    console.log("user_id", user_id);
+    setAssignedId(user_id)
+  }
 
   return (
     <div
@@ -184,6 +197,13 @@ export default function AddEditTaskModal({
         >
           + Add New Subtask
         </button>
+
+        <UserSelect valueDefault={assigned_id} onSelected={assignedUser} />
+        <div className="input-container">
+          {!isValid && !assigned_id && (
+            <span className="cant-be-empty-span text-L"> Can't be empty</span>
+          )}
+        </div>
 
         <div className="select-column-container">
           <label className="text-M">Current Status</label>
