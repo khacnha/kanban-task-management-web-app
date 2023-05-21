@@ -2,15 +2,29 @@
 
 This is a solution to the [Kanban task management web app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/kanban-task-management-web-app-wgQLt-HlbB). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
+## Install and demo:
+- Need to run server backend first.
+- Install nodejs
+- Open cmd and go to this project folder
+- Install packages: `npm install`
+- Run build: `npm run build`
+- Start project: `npm start`
+- Open website with browser: `http://localhost:3000`
+
+Note: Option for Dev mode `npm run start`
+
 ## Table of contents
 
-- [Overview](#overview)
-  - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
-  - [Links](#links)
-  - [Built with](#built-with)
-  - [Useful resources](#useful-resources)
-- [Author](#author)
+- [Frontend Mentor - Kanban task management web app solution](#frontend-mentor---kanban-task-management-web-app-solution)
+  - [Install and demo:](#install-and-demo)
+  - [Table of contents](#table-of-contents)
+  - [Overview](#overview)
+    - [The challenge](#the-challenge)
+    - [Screenshot](#screenshot)
+    - [Links](#links)
+    - [Built with](#built-with)
+    - [Useful resources](#useful-resources)
+  - [Author](#author)
 
 ## Overview
 
