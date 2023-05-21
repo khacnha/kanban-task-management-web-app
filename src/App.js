@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import boardsSlice from "./redux/boardsSlice";
 import EmptyBoard from "./components/EmptyBoard";
 import { getBoards } from "./redux/boardsSlice";
+import { getMe } from "./redux/authSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function App() {
   
   // Call boards data
   useEffect(() => {
+    dispatch(getMe());
     dispatch(getBoards());
   }, [dispatch]);
   

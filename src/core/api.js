@@ -95,4 +95,8 @@ export const userApi = {
     const response = await api.get("/v1/users");
     return response.data;
   },
+  getMe: async () => {
+    const response = await api.get("/v1/users/me");
+    return response.data;
+  },
 };

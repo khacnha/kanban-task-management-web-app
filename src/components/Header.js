@@ -44,7 +44,7 @@ export default function Header() {
 
   const onDeleteBtnClick = (e) => {
     if (e.target.textContent === "Delete") {
-      dispatch(deleteBoard({id: board.id}));
+      dispatch(deleteBoard({ id: board.id }));
       dispatch(boardsSlice.actions.setBoardActive({ index: 0 }));
       setIsDeleteModalOpen(false);
     } else {
@@ -61,6 +61,7 @@ export default function Header() {
         </div>
 
         <div className="header-name-container heading-L">
+          
           <h3 className="header-name">{board.name}</h3>
           {!isBigScreen && (
             <img

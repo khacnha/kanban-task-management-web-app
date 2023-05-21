@@ -13,6 +13,7 @@ export default function HeaderDropdown({
 }) {
   const dispatch = useDispatch();
   const boards = useSelector((state) => state.boards);
+  const { profile } = useSelector((state) => state.auth);
   // const theme = useSelector((state) => state.theme);
 
   return (
@@ -55,6 +56,7 @@ export default function HeaderDropdown({
           </div>
         </div>
         <hr className="line" />
+
         <div
           className="dropdown-board dropdown-create-board-btn"
           onClick={() => {
@@ -67,6 +69,15 @@ export default function HeaderDropdown({
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"></path>
           </svg>
           Logout
+        </div>
+        <div className="user-profile">
+          <div className="wrap">
+            {profile ? (<div className="user">
+              <img className="avatar" src={`https://ui-avatars.com/api/?name=${profile.username}&background=CC4628&color=fff`} alt={profile.username} />
+              <div className="name"><b>{profile.username}</b><br /><small>{profile.email}</small></div>
+            </div>
+            ) : null}
+          </div>
         </div>
 
         {/* <div className="theme-toggle">

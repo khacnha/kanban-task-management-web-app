@@ -137,7 +137,8 @@ color: #635fc7;
     brightness(104%) contrast(100%);
 }
 
-.theme-toggle {
+.theme-toggle,
+.user-profile {
   padding: 14px;
   display: flex;
   align-items: center;
@@ -148,7 +149,8 @@ color: #635fc7;
   border-radius: 6px;
 }
 
-.dark .theme-toggle {
+.dark .theme-toggle,
+.dark .user-profile {
   background: #20212c;
 }
 
@@ -249,7 +251,8 @@ input:checked + .slider:before {
     position: relative;
   }
 
-  .theme-toggle {
+  .theme-toggle,
+  .user-profile {
     position: absolute;
     left: 0;
     right: 0;
@@ -267,4 +270,13 @@ input:checked + .slider:before {
     height: 20px;
     width: 5px;
   }
+}
+
+.user-profile{
+  justify-content: start;
+}
+.user-profile .wrap {
+  overflow: hidden;
+  margin-right: 10px;
+  color: #070927;
 }

@@ -1,35 +1,48 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { auth } from "../core/api";
+import { auth, userApi } from "../core/api";
 
-const token =  localStorage.getItem('token');
+const token = localStorage.getItem('token');
 const initialState = {
-  isLoggedIn: token ? true: false,
+  isLoggedIn: token ? true : false,
   error: "",
-  token: token
+  token: token,
+  profile: null
 };
 export const login = createAsyncThunk(
   "login/post",
   async ({ username, password }) => {
     try {
-      console.log(username, password);
       const response = await auth.login(username, password);
       localStorage.setItem('token', response.token);
+
+      const user = await userApi.getMe()
+
       return {
         isLoggedIn: true,
         error: "",
-        token: response.token
+        token: response.token,
+        profile: user
       };
     } catch (e) {
       console.log(e);
       return {
         isLoggedIn: false,
         error: "Unable to log in with provided credentials!",
-        token: ""
+        token: "",
+        profile: null
       };
     }
   }
 );
 
+export const getMe = createAsyncThunk(
+  "users/me",
+  async () => {
+    const user = await userApi.getMe()
+    return user;
+
+  }
+);
 
 const authSlice = createSlice({
   name: "auth",
@@ -37,6 +50,9 @@ const authSlice = createSlice({
   extraReducers: {
     [login.fulfilled]: (state, action) => {
       return action.payload;
+    },
+    [getMe.fulfilled]: (state, action) => {
+      state.profile = action.payload
     },
   },
   reducers: {
@@ -46,6 +62,7 @@ const authSlice = createSlice({
       state.error = "";
       state.isLoggedIn = false;
       state.token = "";
+      state.profile = null
     },
   }
 });
