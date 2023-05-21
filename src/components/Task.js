@@ -19,7 +19,7 @@ export default function Task({ taskIndex, colIndex }) {
   });
 
   const handleOnDrag = (e) => {
-    e.dataTransfer.setData("text", JSON.stringify({taskIndex, prevColIndex: colIndex}));
+    e.dataTransfer.setData("text", JSON.stringify({ taskIndex, prevColIndex: colIndex }));
   }
 
   return (
@@ -32,10 +32,20 @@ export default function Task({ taskIndex, colIndex }) {
           setIsTaskModalOpen(true);
         }}
       >
-        <p className="task-title heading-M">{task.title}</p>
-        <p className="num-of-subtasks text-M">
-          {completed} of {subtasks.length} subtasks
-        </p>
+        <div>
+          <p className="task-title heading-M">{task.title}</p>
+          <p className="num-of-subtasks text-M">
+            {completed} of {subtasks.length} subtasks
+          </p>
+        </div>
+        {
+          task.assigned ? (
+            <div className="user">
+              <img className="avatar" src={`https://ui-avatars.com/api/?name=${task.assigned.username}&background=efeff9&color=635fc7`} alt={task.assigned.username} />
+
+            </div>
+          ) : null
+        }
       </div>
       {isTaskModalOpen && (
         <TaskModal

@@ -36,7 +36,6 @@ api.interceptors.response.use(function (response) {
 
 export const auth = {
   login: async (username, password) => {
-    console.log("username, password", username, password)
     const response = await api.post("/login/", { username, password });
     return response.data;
   }
@@ -75,6 +74,7 @@ export const tasksAPI = {
     return response.data;
   },
   update: async (id, data) => {
+    delete data["assigned"]; 
     const response = await api.patch(`/v1/tasks/${id}`, data);
     return response.data;
   },

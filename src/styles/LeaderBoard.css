@@ -5,12 +5,6 @@
   max-width: 1124px;
 }
 
-.leaderboard img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
 .leaderboard-item {
   display: flex;
   align-items: center;
@@ -29,13 +23,18 @@
   color: #635fc7;
 }
 
-.leaderboard-item .user {
+.user {
   display: flex;
   flex-flow: row;
   align-items: center;
   gap: 10px;
   font-weight: bold;
   padding-right: 20px;
+}
+.user img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
 .leaderboard-item .score {
