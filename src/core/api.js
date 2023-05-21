@@ -62,6 +62,10 @@ export const boardsAPI = {
   delete: async (id) => {
     await api.delete(`/v1/projects/${id}`);
   },
+  getLeaderboard: async (id) => {
+    const response = await api.get(`/v1/leaderboard/${id}`);
+    return response.data;
+  },
 };
 
 export const tasksAPI = {

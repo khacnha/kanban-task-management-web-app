@@ -9,88 +9,6 @@ import Sidebar from "./Sidebar";
 import Tabs from "./Tabs"
 import LeaderBoard from "./LeaderBoard/Index"
 
-const leaderboard = [
-  {
-    rank: "1st",
-    name: "John",
-    avatar: "https://i.pravatar.cc/150?img=1",
-    totalTasks: 20,
-    totalCompleted: 15,
-    successRate: 100
-  },
-  {
-    rank: "2nd",
-    name: "Jane",
-    avatar: "https://i.pravatar.cc/150?img=2",
-    totalTasks: 10,
-    totalCompleted: 8,
-    successRate: 100
-  },
-  {
-    rank: "3rd",
-    name: "Bob",
-    avatar: "https://i.pravatar.cc/150?img=3",
-    totalTasks: 15,
-    totalCompleted: 12,
-    successRate: 90
-  },
-  {
-    rank: "4th",
-    name: "Bob",
-    avatar: "https://i.pravatar.cc/150?img=4",
-    totalTasks: 15,
-    totalCompleted: 12,
-    successRate: 80
-  },
-  {
-    rank: "5th",
-    name: "Bob",
-    avatar: "https://i.pravatar.cc/150?img=5",
-    totalTasks: 15,
-    totalCompleted: 12,
-    successRate: 70
-  },
-  {
-    rank: "6th",
-    name: "Bob",
-    avatar: "https://i.pravatar.cc/150?img=6",
-    totalTasks: 15,
-    totalCompleted: 12,
-    successRate: 70
-  },
-  {
-    rank: "7th",
-    name: "Bob",
-    avatar: "https://i.pravatar.cc/150?img=7",
-    totalTasks: 15,
-    totalCompleted: 12,
-    successRate: 70
-  },
-  {
-    rank: "8th",
-    name: "Bob",
-    avatar: "https://i.pravatar.cc/150?img=8",
-    totalTasks: 15,
-    totalCompleted: 12,
-    successRate: 70
-  },
-  {
-    rank: "9th",
-    name: "Bob",
-    avatar: "https://i.pravatar.cc/150?img=9",
-    totalTasks: 15,
-    totalCompleted: 12,
-    successRate: 70
-  },
-  {
-    rank: "10th",
-    name: "Bob",
-    avatar: "https://i.pravatar.cc/150?img=10",
-    totalTasks: 15,
-    totalCompleted: 12,
-    successRate: 70
-  },
-];
 
 export default function Board() {
   const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" });
@@ -134,7 +52,7 @@ export default function Board() {
           </div>
         </div>
         <div label="LeaderBoard">
-          <LeaderBoard data={leaderboard} />
+          <LeaderBoard id={board.id} />
         </div>
       </Tabs>
 
