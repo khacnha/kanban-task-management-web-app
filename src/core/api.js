@@ -26,7 +26,7 @@ api.interceptors.response.use(function (response) {
   // Do something with response data
   return response;
 }, function (error) {
-  const msg = error.response.config.url == "/login/" ? "Unable to log in with provided credentials!" : error.message;
+  const msg = error.response.config.url === "/login/" ? "Unable to log in with provided credentials!" : error.message;
 
   toast.error(msg);
   // Any status codes that falls outside the range of 2xx cause this function to trigger
