@@ -50,6 +50,7 @@
   align-items: center;
   justify-content: center;
   transition: 0.3s;
+  z-index: 1;
 }
 
 .sidebar-closed .toggle-sidebar-container {
@@ -70,3 +71,8 @@
   margin: 0;
 }
 
+.line{
+  height: 1px;
+  background: #e5e5e5;
+  margin: 20px 0;
+}

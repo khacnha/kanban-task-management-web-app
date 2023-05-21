@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import crossIcon from "../assets/icon-cross.svg";
-import boardsSlice, { addBoard, editBoard } from "../redux/boardsSlice";
+import { addBoard, editBoard } from "../redux/boardsSlice";
 import "../styles/BoardModals.css";
 import { v4 as uuidv4 } from "uuid";
 

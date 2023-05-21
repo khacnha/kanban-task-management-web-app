@@ -91,6 +91,7 @@ header .elipsis-menu {
 }
 
 .dropdown-board {
+  display: flex;
   padding: 15px 24px;
   font-weight: 700;
   font-size: 15px;
@@ -116,9 +117,10 @@ color: #635fc7;
   color: white;
 }
 
-.dropdown-board img {
+.dropdown-board img, .dropdown-board svg {
   margin-right: 12px;
 }
+
 
 .dropdown-create-board-btn {
   color: #635fc7;

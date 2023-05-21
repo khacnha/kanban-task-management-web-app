@@ -26,8 +26,9 @@ api.interceptors.response.use(function (response) {
   // Do something with response data
   return response;
 }, function (error) {
-  console.log("APIerror", error.message);
-  toast.error(error.message);
+  const msg = error.response.config.url == "/login/" ? "Unable to log in with provided credentials!" : error.message;
+
+  toast.error(msg);
   // Any status codes that falls outside the range of 2xx cause this function to trigger
   // Do something with response error
   return Promise.reject(error);
@@ -36,7 +37,7 @@ api.interceptors.response.use(function (response) {
 export const auth = {
   login: async (username, password) => {
     console.log("username, password", username, password)
-    const response = await api.post("/login/", {username, password});
+    const response = await api.post("/login/", { username, password });
     return response.data;
   }
 }
@@ -48,13 +49,13 @@ export const boardsAPI = {
   },
   create: async (data) => {
     // remove tasks key in columns
-    data.columns = data.columns.map(({name, id}) => ({name, id}));
+    data.columns = data.columns.map(({ name, id }) => ({ name, id }));
     const response = await api.post("/v1/projects", data);
     return response.data;
   },
   update: async (id, data) => {
     // remove tasks key in columns
-    data.columns = data.columns.map(({name, id}) => ({name, id}));
+    data.columns = data.columns.map(({ name, id }) => ({ name, id }));
     const response = await api.patch(`/v1/projects/${id}`, data);
     console.log("response", response)
     return response.data;

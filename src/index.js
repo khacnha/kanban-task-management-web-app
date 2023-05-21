@@ -1,59 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import './styles/index.css';
 import './styles/Typography.css';
 import App from './App';
 import Login from './Login';
 import store from './redux/store';
 import reportWebVitals from './reportWebVitals';
-import { auth } from './core/api';
 import { ToastContainer } from "react-toastify";
+import { login } from './redux/authSlice';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const Main = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [error, setError] = useState('');
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsLoggedIn(true);
-    }
-  }, []);
-  
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
   const handleLogin = (username, password) => {
-    auth.login(username, password)
-      .then((response) => {
-        console.log("login", response);
-        localStorage.setItem('token', response.token);
-        setIsLoggedIn(true);
-      })
-      .catch((error) => {
-        console.log("login err", error);
-        setError("Unable to log in with provided credentials!");
-      });
+    dispatch(login({ username, password }));
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setIsLoggedIn(false);
-  };
-
-  return isLoggedIn ? (
+  return (
     <>
-      <Provider store={store}>
-        <App />
-        <ToastContainer/>
-      </Provider>
+      {isLoggedIn ? <App /> : <Login handleLogin={handleLogin} />}
+      <ToastContainer />
     </>
-  ) : (
-    <Login handleLogin={handleLogin} error={error} />
   );
 };
 
-root.render(<Main />);
+root.render(<Provider store={store}><Main /></Provider>);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

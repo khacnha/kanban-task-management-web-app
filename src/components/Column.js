@@ -1,7 +1,7 @@
 import React from "react";
 import Task from "./Task";
 import "../styles/Task.css";
-import boardsSlice, { editTask } from "../redux/boardsSlice";
+import { editTask } from "../redux/boardsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Column({ colIndex }) {
