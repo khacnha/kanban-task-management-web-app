@@ -27,11 +27,11 @@ const Login = ({ handleLogin, error }) => {
         <br/>
         <div>
           <label>Username:</label>
-          <input type="text" value={username} onChange={handleUsernameChange} />
+          <input type="text" placeholder="Your username" value={username} onChange={handleUsernameChange} />
         </div>
         <div>
           <label>Password:</label>
-          <input type="password" value={password} onChange={handlePasswordChange} />
+          <input type="password" placeholder="Your password" value={password} onChange={handlePasswordChange} />
         </div>
         <button type="submit">Login</button>
       </form>
