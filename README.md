@@ -13,10 +13,18 @@ This is a solution to the [Kanban task management web app challenge on Frontend 
 
 Note: Option for Dev mode `npm run start`
 
+## Update:
+- Backend for this Frontend
+- Add Login page
+- Add Leaderboard screen
+- Add User (assigned) for Task
+- Update small UI
+
 ## Table of contents
 
 - [Frontend Mentor - Kanban task management web app solution](#frontend-mentor---kanban-task-management-web-app-solution)
   - [Install and demo with backend:](#install-and-demo-with-backend)
+  - [Update:](#update)
   - [Table of contents](#table-of-contents)
   - [Overview](#overview)
     - [The challenge](#the-challenge)
