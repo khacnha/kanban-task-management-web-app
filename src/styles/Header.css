@@ -36,7 +36,7 @@ header .elipsis-menu {
 }
 .add-task-btn {
   margin-right: 16px;
-  background: #635fc7;
+  background: #00C2FF;
   color: white;
   border-radius: 24px;
   padding: 10px 18px;
@@ -46,7 +46,7 @@ header .elipsis-menu {
 }
 
 .add-task-btn:hover {
-  background: #A8A4FF;
+  background: #93E5FF;
 }
 
 .btn-off {
@@ -102,17 +102,17 @@ header .elipsis-menu {
 
 .dropdown-board:hover {
   background: rgba(99, 95, 199, 0.1);
-  color: #635fc7;
+  color: #00C2FF;
   border-radius: 0px 100px 100px 0px;
 }
 
 .dark .dropdown-board:hover {
 background: white;
-color: #635fc7;
+color: #00C2FF;
 }
 
 .board-active {
-  background-color: #635fc7;
+  background-color: #00C2FF;
   border-radius: 0px 100px 100px 0px;
   color: white;
 }
@@ -123,13 +123,13 @@ color: #635fc7;
 
 
 .dropdown-create-board-btn {
-  color: #635fc7;
-  fill: #635fc7;
+  color: #00C2FF;
+  fill: #00C2FF;
 }
 
 .filter-purple {
-  filter: invert(39%) sepia(47%) saturate(748%) hue-rotate(203deg)
-    brightness(94%) contrast(93%);
+  filter: invert(39%) sepia(47%) saturate(748%) hue-rotate(151deg)
+  brightness(94%) contrast(93%)
 }
 
 .filter-white {
@@ -175,13 +175,13 @@ color: #635fc7;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #635fc7;
+  background-color: #00C2FF;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 .slider:hover {
-  background: #A8A4FF;
+  background: #93E5FF;
 }
 
 .slider:before {
@@ -216,11 +216,8 @@ input:checked + .slider:before {
 
 @media only screen and (min-width: 768px) {
   .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    text-align: center;
     width: calc(261px - 16px);
-    padding-left: 10px;
   }
 
   .logo-text {

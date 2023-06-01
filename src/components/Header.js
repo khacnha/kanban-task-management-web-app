@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/Header.css";
-import logo from "../assets/logo-mobile.svg";
+import logo from "../assets/logo.jpg";
 import addTaskMobile from "../assets/icon-add-task-mobile.svg";
 import iconDown from "../assets/icon-chevron-down.svg";
 import iconUp from "../assets/icon-chevron-up.svg";
@@ -56,8 +56,7 @@ export default function Header() {
     <div className="header-container">
       <header>
         <div className="logo-container">
-          <img className="logo" src={logo} alt="logo" />
-          {isBigScreen && <h3 className="logo-text">kanban</h3>}{" "}
+          <img height={48} className="logo" src={logo} alt="logo" />
         </div>
 
         <div className="header-name-container heading-L">

@@ -32,11 +32,11 @@ textarea {
 select:focus,
 input:focus,
 textarea:focus {
-  outline: 1px solid #635fc7;
+  outline: 1px solid #00C2FF;
 }
 
 input[type="checkbox"] {
-  accent-color: #635fc7;
+  accent-color: #00C2FF;
 }
 
 .light {

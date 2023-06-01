@@ -29,16 +29,16 @@
 
 .toggle-sidebar-container:hover {
   background: rgba(99, 95, 199, 0.1);
-  color: #635FC7;
+  color: #00C2FF;
 }
 
 .dark .toggle-sidebar-container:hover {
   background: white;
-  color: #635FC7;
+  color: #00C2FF;
 }
 
 .sidebar-closed {
-  background: #635FC7;
+  background: #00C2FF;
   width: 56px;
   height: 48px;
   border-radius: 0px 100px 100px 0px;
@@ -63,7 +63,7 @@
 
 
 .sidebar-closed:hover {
-  background: #A8A4FF;
+  background: #93E5FF;
   cursor: pointer;
 }
 

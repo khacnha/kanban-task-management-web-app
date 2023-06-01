@@ -35,7 +35,7 @@
   font-weight: 700;
   font-size: 15px;
   color: white;
-  background-color: #635fc7;
+  background-color: #00C2FF;
   border-radius: 24px;
   padding: 15px 18px;
   margin-top: 24px;
@@ -43,7 +43,7 @@
 
 .create-btn:hover,
 .add-column-btn:hover {
-  background-color: #a8a4ff;
+  background-color: #93E5FF;
 }
 
 .add-column-btn {
@@ -52,7 +52,7 @@
 
 .dark .add-column-btn {
   background-color: white;
-  color: #635fc7;
+  color: #00C2FF;
 }
 
 @media only screen and (min-width: 768px) {

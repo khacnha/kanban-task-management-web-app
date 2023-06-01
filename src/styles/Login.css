@@ -1,16 +1,38 @@
-.bg-login{
+.bg-login {
   background-color: #f4f7fd;
   padding: 100px 0;
   height: 100vh;
 }
+
+.bg-login .container {
+  max-width: 900px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.bg-login .body {
+  display: flex;
+  background-color: #93e4ff;
+  padding: 100px 20px;
+  margin-top: 20px;
+  border-radius: 20px;
+  justify-content: space-between;
+}
+
+.bg-login .body .laptop {
+  margin-top: 25px;
+}
+
 .login-form {
-  background-color: #fff;
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0;
+  width: 100%;
+}
+
+.login-form h3 {
+  font-size: 30px;
   text-align: center;
-  max-width: 300px;
-  margin: auto;
 }
 
 .login-form label,
@@ -23,33 +45,45 @@
 .login-form label {
   font-weight: normal;
   text-align: left;
+  color: black;
 }
 
 .login-form input {
   width: 100%;
-  padding: 10px;
+  padding: 15px 10px;
   border-radius: 3px;
   border: 1px solid #ccc;
+  background-color: #fff;
 }
 
 .login-form button {
   width: 100%;
-  padding: 10px;
+  padding: 15px 10px;
   border-radius: 3px;
   border: none;
-  background-color: #007bff;
+  background-color: #00C2FF;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
+  border: 1px solid #00C2FF
 }
 
 .login-form button:hover {
-  background-color: #0069d9;
+  background-color: transparent;
 }
 
-.error{
+.error {
   font-weight: bold;
   color: red;
   padding-top: 10px;
   font-size: 12px;
+}
+@media only screen and (max-width: 768px) {
+  .bg-login .body {
+    display: block;
+    text-align: center;
+  }
+  .login-form{
+    max-width: 100%;
+  }
 }

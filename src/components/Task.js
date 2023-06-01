@@ -41,7 +41,7 @@ export default function Task({ taskIndex, colIndex }) {
         {
           task.assigned ? (
             <div className="user">
-              <img className="avatar" src={`https://ui-avatars.com/api/?name=${task.assigned.username}&background=efeff9&color=635fc7`} alt={task.assigned.username} />
+              <img className="avatar" src={`https://ui-avatars.com/api/?name=${task.assigned.username}&background=efeff9&color=00C2FF`} alt={task.assigned.username} />
 
             </div>
           ) : null
